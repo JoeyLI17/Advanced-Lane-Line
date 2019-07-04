@@ -43,7 +43,7 @@ Please consider this document as my Writeup.
 
 I created a separate file for camera calibration. So that in the future I can use the script to calibration other camera.
 * The file called `2016-06-29_Camera_Calibration_JLI.ipynb`
-* The output is a pickle file: 
+* The output is a pickle file: ./camera_cal/PRJ2_JLI_mtx_dist_pickle.p
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 

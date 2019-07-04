@@ -143,4 +143,8 @@ Here's a [link to my video result](./project_video_color_lane_JLI.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+i. I tryed the challenge video with the nerray sholder and road patch. The code find the road edge of the lane split, instead of the lane lines. 
+  * I need to add another layer of image pre-processing to the combined binary image. Which can filter out the dark spots in the image. I am thinking using RGB threshold to for this.
+ii. The harder challenge video has excessively brightness change which makes the lane line and the pavement almost same brigthness.
+  * Maybe the V-channel in the HSV can solve the problem? I need to check when i have the time.
+iii. Vehicle bounds up and down on the road.

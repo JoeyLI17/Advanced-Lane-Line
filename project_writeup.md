@@ -41,7 +41,7 @@ Please consider this document as my Writeup.
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
-I created a separate file for camera calibration. So that in the future I can use the script to calibration other camera.
+I created a separate file for camera calibration. So that in the future I can use the script to calibration the other cameras.
 * The file called `2016-06-29_Camera_Calibration_JLI.ipynb`
 * The output is a pickle file: ./camera_cal/PRJ2_JLI_mtx_dist_pickle.p
 
@@ -143,10 +143,16 @@ Here's a [link to my video result](./project_video_color_lane_JLI.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-i. I tryed the challenge video with the nerray sholder and road patch. The code find the road edge of the lane split, instead of the lane lines. 
-  * I need to add another layer of image pre-processing to the combined binary image. Which can filter out the dark spots in the image. I am thinking using RGB threshold to for this.
+i. I tried the challenge video with the narrow shoulder and road patch. The code finds the road edge of the lane split, instead of the lane lines. 
+  * I need to add another layer of image pre-processing to the combined binary image. That filter should be able to filter out the dark spots in the image. I am thinking using RGB threshold to for this.
   
-ii. The harder challenge video has excessively brightness change which makes the lane line and the pavement almost same brigthness.
-  * Maybe the V-channel in the HSV can solve the problem? I need to check when i have the time.
+ii. The harder challenge video has excessively brightness change which makes the lane line and the pavement almost same brightness.
+  * I talked to my mentor, it looks like the V-channel in the HSV can solve the problem.
   
-iii. Vehicle bounds up and down on the road.
+iii. Vehicle bounds on the road.
+  * When the lane moves up and down rapidly, my code has difficulty to find the lines. The solution could be using the previous ployfit curve directly if the lines are out of frame. Instead of finding new points around ployfit line. Or I can reduce the margin of the searching area around the polynomial curve.
+  
+### Questions
+1. How fast can the processors on the vehicle processing their lane line code? 
+ * My code takes around 3 to 5 seconds to process one image. (But I am using the jupytor notebook.)
+2. What's the best way of detecting lane lines in the city?

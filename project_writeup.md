@@ -18,8 +18,8 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./camera_cal/test_undist.jpg "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
+[image2]: ./test_images/Transformed.jpg "Road Transformed"
+[image3]: ./test_images/binary_combo.jpg "Binary Example"
 [image4]: ./test_images/straight_lines1_top_view_JLI.jpg "Warp Example"
 [image5]: ./test_images/test6_color_fit_line_JLI.jpg "Fit Visual"
 [image6]: ./test_images/lane_line_text_test6_JLI.jpg "Output"
@@ -41,7 +41,9 @@ Please consider this document as my Writeup.
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
-The code for this step is contained in the first code cell of the IPython notebook located in "./examples/example.ipynb" (or in lines # through # of the file called `2016-06-29_Camera_Calibration_JLI.ipynb`).  
+I created a separate file for camera calibration. So that in the future I can use the script to calibration other camera.
+* The file called `2016-06-29_Camera_Calibration_JLI.ipynb`
+* The output is a pickle file: 
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 

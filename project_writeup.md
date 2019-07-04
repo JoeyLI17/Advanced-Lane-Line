@@ -165,5 +165,5 @@ iii. Vehicle bounds on the road.
   
 ### Questions
 1. How fast can the processors on the vehicle processing their lane line code? 
- * My code takes around 3 to 5 seconds to process one image. (But I am using the Jupytor notebook.)
+  * My code takes around 3 to 5 seconds to process one image. (But I am using the Jupytor notebook.)
 2. What's the best way of detecting lane lines in the city?

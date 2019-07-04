@@ -69,6 +69,7 @@ I used a combination of gradient thresholds (sobel x) and color (HLS) to generat
 Uisng the code in file `2019-06-30_Combain_S_sobel.ipynb`, I captured the tranfer function `m` and `mivn`. They were saved in a pickle file `JLI_p_t_transfer.p`. For detecting the source (`src`) and destination (`dst`) points, I use a straight line image, apply Canny edge detection and Hough transform tool learned from the priouse uints to fine the gradient of the lane lines in the image. Then, I use these result for the `src` definition. A small tuning also applied to the detected `src` points:
 
 ```python
+# src
 x1 = leftXmin
 x2 = leftXmax
 x3 = rightXmin
@@ -84,8 +85,8 @@ p2 = [x2+5,y2]
 p3 = [x3-2,y3]
 p4 = [x4,y4]
 
+# dst
 # leave some room for the curve
-# bird eye for three lanes
 dx1 = x1 +100
 dx4 = x4 -100
 
@@ -111,7 +112,7 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+In file `01_Project_code_JLI.ipynb`, `Cell # Step 4` `Cell # Step 5` discriptes the way I find the starting point and using sliding windows to detect and gether all the data points I need for the 2nd order ployfit. Afterwards, my lane lines with a 2nd order polynomial kinda like this:
 
 ![alt text][image5]
 

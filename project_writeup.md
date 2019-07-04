@@ -118,11 +118,14 @@ In file `01_Project_code_JLI.ipynb`, `Cell # Step 4` `Cell # Step 5` discriptes 
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+Radius of the curverture
+* The `xm_per_pix` and `ym_per_pix` are the coefficent between pixle distance and real-world length. They are defined in file `2019-06-30_Combain_S_sobel.ipynb`, and stored in `JLI_p_t_transfer.p`. (`Cell # Find relation ship between pixle and distacne`)
+* I find the real-world radius of the curvature in file `01_Project_code_JLI.ipynb`, `Cell # Step 7`. 
+* The distance between lane center and vehicle center is detaced using code under `Cell # Process` of  file `01_Project_code_JLI.ipynb`. (`# step 8: over lay infomration`)
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+In file `01_Project_code_JLI.ipynb`, I implemented this step in `Cell # Process`, the line `# step 6: back to perspective` and ` # combine original with color lane`.  Here is an example of my result on a test image:
 
 ![alt text][image6]
 

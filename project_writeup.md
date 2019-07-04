@@ -55,18 +55,29 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
+The undistort parameters `mtx` and `dist` are found and stored in `PRJ2_JLI_mtx_dist_pickle.p` file, so I can directly use them. The function to undistort the image is:
+
+```
+# Step:1
+# Undistort the image
+def cal_undistort(img,mtx,dist):
+    undist = cv2.undistort(img, mtx, dist, None, mtx)
+    return undist
+```
+
+It in the file `01_Project_code_JLI.ipynb`, `Cell # Step 1:`.
+Here is am exmaple image :
 ![alt text][image2]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of gradient thresholds (sobel x) and color (HLS) to generate a binary image ( Cell # Step 2:1 and Cell #  step2:2 in `01_Project_code_JLI.ipynb`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+I used a combination of gradient thresholds (Sobel x) and color (HLS) to generate a binary image ( Cell # Step 2:1 and Cell #  step2:2 in `01_Project_code_JLI.ipynb`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
 
 ![alt text][image3]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-Uisng the code in file `2019-06-30_Combain_S_sobel.ipynb`, I captured the tranfer function `m` and `mivn`. They were saved in a pickle file `JLI_p_t_transfer.p`. For detecting the source (`src`) and destination (`dst`) points, I use a straight line image, apply Canny edge detection and Hough transform tool learned from the priouse uints to fine the gradient of the lane lines in the image. Then, I use these result for the `src` definition. A small tuning also applied to the detected `src` points:
+Using the code in file `2019-06-30_Combain_S_sobel.ipynb`, I captured the transfer function `m` and `mivn`. They were saved in a pickle file `JLI_p_t_transfer.p`. For detecting the source (`src`) and destination (`dst`) points, I use a straight line image, apply Canny edge detection and Hough transform tool learned from the previous units to find the gradient of the lane lines in the image. Then, I use these result for the `src` definition. A small tuning also applied to the detected `src` points:
 
 ```python
 # src
@@ -112,16 +123,16 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-In file `01_Project_code_JLI.ipynb`, `Cell # Step 4` `Cell # Step 5` discriptes the way I find the starting point and using sliding windows to detect and gether all the data points I need for the 2nd order ployfit. Afterwards, my lane lines with a 2nd order polynomial kinda like this:
+In file `01_Project_code_JLI.ipynb`, `Cell # Step 4` `Cell # Step 5` describes the way I find the starting point and using sliding windows to detect and gather all the data points I need for the 2nd order ployfit. Afterward, my lane lines with a 2nd order polynomial kinda like this:
 
 ![alt text][image5]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-Radius of the curverture
-* The `xm_per_pix` and `ym_per_pix` are the coefficent between pixle distance and real-world length. They are defined in file `2019-06-30_Combain_S_sobel.ipynb`, and stored in `JLI_p_t_transfer.p`. (`Cell # Find relation ship between pixle and distacne`)
+The radius of the curvature
+* The `xm_per_pix` and `ym_per_pix` are the coefficient between pixel distance and real-world length. They are defined in file `2019-06-30_Combain_S_sobel.ipynb`, and stored in `JLI_p_t_transfer.p`. (`Cell # Find the relationship between pixel and distance`)
 * I find the real-world radius of the curvature in file `01_Project_code_JLI.ipynb`, `Cell # Step 7`. 
-* The distance between lane center and vehicle center is detaced using code under `Cell # Process` of  file `01_Project_code_JLI.ipynb`. (`# step 8: over lay infomration`)
+* The distance between lane center and vehicle center is detected using the code, under `Cell # Process` of file `01_Project_code_JLI.ipynb`. (`# step 8: over lay information`)
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
@@ -154,5 +165,5 @@ iii. Vehicle bounds on the road.
   
 ### Questions
 1. How fast can the processors on the vehicle processing their lane line code? 
- * My code takes around 3 to 5 seconds to process one image. (But I am using the jupytor notebook.)
+ * My code takes around 3 to 5 seconds to process one image. (But I am using the Jupytor notebook.)
 2. What's the best way of detecting lane lines in the city?

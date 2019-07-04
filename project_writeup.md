@@ -66,29 +66,44 @@ I used a combination of gradient thresholds (sobel x) and color (HLS) to generat
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+Uisng the code in file `2019-06-30_Combain_S_sobel.ipynb`, I captured the tranfer function `m` and `mivn`. They were saved in a pickle file `JLI_p_t_transfer.p`. For detecting the source (`src`) and destination (`dst`) points, I use a straight line image, apply Canny edge detection and Hough transform tool learned from the priouse uints to fine the gradient of the lane lines in the image. Then, I use these result for the `src` definition. A small tuning also applied to the detected `src` points:
 
 ```python
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
+x1 = leftXmin
+x2 = leftXmax
+x3 = rightXmin
+x4 = rightXmax
+
+y1 = int(leftLineK1[0]*x1 + leftLineK1[1])
+y2 = int(leftLineK1[0]*x2 + leftLineK1[1])
+y3 = int(rightLineK1[0]*x3 + rightLineK1[1])
+y4 = int(rightLineK1[0]*x4 + rightLineK1[1])
+
+p1 = [x1,y1]
+p2 = [x2+5,y2]
+p3 = [x3-2,y3]
+p4 = [x4,y4]
+
+# leave some room for the curve
+# bird eye for three lanes
+dx1 = x1 +100
+dx4 = x4 -100
+
+dp1 = [dx1,720]
+dp2 = [dx1,0]
+dp3 = [dx4,0]
+dp4 = [dx4,720]
+
 ```
 
 This resulted in the following source and destination points:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
+| 205, 719      | 305, 720      | 
+| 580, 461      | 305, 0        |
+| 702, 460      | 1006, 0       |
+| 1106, 719     | 1006, 720     |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
